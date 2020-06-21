@@ -1,0 +1,141 @@
+{{define "content"}}
+<div style="display: grid; grid-column-start: 2; grid-column-end: 6;">
+    <div>
+        <h1 style="margin-left: 5vh; margin-bottom:0.5vh;">Karteikasten erstellen / bearbeiten</h1>
+        <div class="kar-sort">
+            <p style="margin-left: 5vh; margin-top:0vh;">Hier kannst du eine neue Kartei erstellen oder eine
+                vorhandene bei Bedarf bearbeiten.</p>
+        </div>
+        <div class="er2-all">
+            <div class="er2-topbar">
+                <div>
+                    <p>Name</p>
+                    <p><strong>{{.Kasten.Titel}}</strong></p>
+                </div>
+                <div>
+                    <p>Kategorie</p>
+                    <p><strong>{{.Kasten.Kategorie}} ▶ {{.Kasten.Subkategorie}}</strong></p>
+                </div>
+                <div>
+                    <p>Fortschritt</p>
+                    <p><strong>0%</strong></p>
+                </div>
+                <div style="align-self:center;height:3.5vh;">
+                        <form action="/updatekasten" method="POST" style="text-align: center; ">
+                            <input type="hidden" name="kastenid" value="{{.Kasten.ID}}">
+                            <input type="hidden" name="updaten" value="updaten">
+                    <button style="color:#ffffff; text-align:center;border:none;height:3.5vh; width:100%;padding:0!important;background-color:#2ECC71; font: inherit;cursor: pointer;text-align: center;text-justify:center"><strong>Bearbeiten</strong></button>
+                </form>
+                </div>
+                <div class="count">
+                    <p style="margin-top:0.5vh;color:white;">{{.Kasten.Count}}</p>
+                    <p style="margin-top:-2.25vh;color:white;font-size:1.25vh;">Karten</p>
+                </div>
+            </div>
+            {{if .Kasten.Count}}
+            
+            <div class="er2-karte" id="{{.Erste.ID}}">
+                    <p style="margin:0.5vh 0 0 1vh;">#1</p>
+                    <p style="margin:0 0 0 1vh;font-size: 2.5vh;"><strong> {{.Erste.Titel}}</strong></p>
+                <div style="text-align: end;padding-right: 2vh;padding-top: 2vh;">
+                        <form action="/anschauen" method="POST" style="display:inline-block;">
+                            <input type="hidden" name="kastenid" value="{{.Kasten.ID}}">
+                            <input type="hidden" name="bearbeiten" value="Wat" id="">
+                            <button type="submit" class="login" style="display:inline-block;background-color:#2ECC71;border:none; padding:0!important; font: inherit;cursor: pointer;">Bearbeiten</button>
+                        </form>
+                    <form action="/deletekarte" method="POST" style="display:inline-block;">
+                        <input type="hidden" name="kartenid"  value="{{.Erste.ID}}" id="">
+                        <input type="hidden" name="kastenid" value="{{.Erste.KastenID}}">
+                        <button type="submit" class="login" style=" display:inline-block; width:100%;background-color:#E74C3C;border:none; padding:0!important; font: inherit;cursor: pointer;"><img style="width:2vh;"
+                            src="/favicon/Delete.svg" alt=""></button>
+                    </form>
+                </div>
+            </div>
+                <div class="er2-edit" style="display:block;">
+                    
+                    <form {{if .Aktiv.Frage}} action ="/karteupdaten" {{else}} action="/karteerstellen"{{end}} method="POST" style="grid-column: 2/3;grid-row:2/6;grid-column:2/3; display: grid;grid-template-columns: 1fr 8fr;grid-gap: 2vh;">
+                        <p class="edit-p">Titel</p>
+                        <input name="titel" type="text" required value="{{.Aktiv.Titel}}"> 
+                        <p class="edit-p">Frage</p>
+                        <div>
+                            <textarea name="frage" id="MyID" >{{.Aktiv.Frage}}</textarea>
+                        </div>
+                        <p class="edit-p">Antwort</p>
+                        <div>
+                            <textarea name="antwort" id="Yoo" cols="30" rows="10" >{{.Aktiv.Antwort}}</textarea>
+                        </div>
+                        <div class="edit-b">
+                            <input type="hidden" name="kastenid" value="{{.Kasten.ID}}">
+                            <input type="hidden" name="kartenid" value="{{.Aktiv.ID}}">
+                            <button class="login" type="submit" > {{if .Aktiv.Frage}} Bearbeiten {{else}} Erstellen{{end}}</button>
+                        </div> 
+                </form>
+                </div>
+            {{range .Karten}}
+            <div class="er2-karte" id="{{._id}}">
+                    <p style="margin:0.5vh 0 0 1vh;">#{{.kartennummer}}</p>
+                    <p style="margin:0 0 0 1vh;font-size: 2.5vh;"><strong> {{.titel}}</strong></p>
+                <div style="text-align: end;padding-right: 2vh;padding-top: 2vh;">
+                        <form action="/anschauen" method="POST" style="display:inline-block;">
+                            <input type="hidden" name="kastenid" value="{{.kastenid}}">
+                            <input type="hidden" name="kartenid" value="{{._id}}">
+                            <input type="hidden" name="bearbeiten" value="Wat" id="">
+                            <button type="submit" class="login" style="display:inline-block;background-color:#2ECC71;border:none; padding:0!important; font: inherit;cursor: pointer;">Bearbeiten</button>
+                        </form>
+                    <form action="/deletekarte" method="POST" style="display:inline-block;">
+                        <input type="hidden" name="kartenid"  value="{{._id}}" id="">
+                        <input type="hidden" name="kastenid" value="{{.kastenid}}">
+                        <button type="submit" class="login" style=" display:inline-block; width:100%;background-color:#E74C3C;border:none; padding:0!important; font: inherit;cursor: pointer;"><img style="width:2vh;"
+                            src="/favicon/Delete.svg" alt=""></button>
+                    </form>
+                </div>
+            </div>
+            {{end}}
+            <div class="er2-karte" id="newkarte">
+                    <p style="margin:0.5vh 0 0 1vh;">#</p>
+                    <p style="margin:0 0 0 1vh;font-size: 2.5vh;"><strong>Erstelle eine neue Karte</strong></p>
+                    <div style="text-align: end;padding-right: 2vh;padding-top: 2vh;">
+                    <form action="/anschauen" method="POST" style="display:inline-block;text-align:end;">
+                        <input type="hidden" name="kastenid" value="{{.Kasten.ID}}">
+                        <input type="hidden" name="kartenid" value="neue">
+                        <input type="hidden" name="bearbeiten" value="Wat" id="">
+                        <button type="submit" class="login" style="display:inline-block;background-color:#2ECC71;border:none; padding:0!important; font: inherit;cursor: pointer;">Bearbeiten</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+            {{else}}
+            <div class="er2-karte">
+                <p style="margin:0.5vh 0 0 1vh;">#1</p>
+                <p style="margin:0 0 0 1vh;font-size: 2.5vh;"><strong>Erstelle eine neue Karte</strong></p>
+                
+            </div>
+            <div class="er2-edit" style="display:block;">
+                    
+                    <form  action="/karteerstellen" method="POST" style="grid-column: 2/3;grid-row:2/6;grid-column:2/3; display: grid;grid-template-columns: 1fr 8fr;grid-gap: 2vh;">
+                        <p class="edit-p">Titel</p>
+                        <input name="titel" type="text" required> 
+                        <p class="edit-p">Frage</p>
+                        <div>
+                            <textarea name="frage" id="MyID" ></textarea>
+                        </div>
+                        <p class="edit-p">Antwort</p>
+                        <div>
+                            <textarea name="antwort" id="Yoo" cols="30" rows="10" ></textarea>
+                        </div>
+                        <div class="edit-b">
+                            <input type="hidden" name="kastenid" value="{{.Kasten.ID}}">
+                            <button class="login" type="submit" > Erstellen</button>
+                        </div> 
+                </form>
+                </div>
+            {{end}}
+        </div>
+    </div>
+</div>
+
+<script>
+    var y = document.getElementById('{{.Aktiv.ID}}') ;
+    y.style.backgroundColor = "#27AE60";
+</script>
+{{end}}

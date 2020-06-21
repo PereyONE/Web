@@ -1,0 +1,214 @@
+{{define "content"}}
+<div style="display: grid; grid-column-start: 2; grid-column-end: 6;">
+    <div>
+        <h1 style="margin-left: 5vh; margin-bottom:0.5vh;">Karteikästen</h1>
+        <p style="margin-left: 5vh; margin-top:0vh;">Im Karteikasten findest du alle öffentlichen Karteien.</p>
+        
+        <div style="margin-left: 5vh">
+            <h2>Naturwissenschaften</h2>
+            <div class="kar-layout">
+                {{if .Naturwissenschaften}}
+                    {{range .Naturwissenschaften}}        
+                <div class="kar-panel">
+                    <p class="kar-top">{{.subkategorie}}</p>
+                    <div class="kar-heading">
+                        <div class="kar-title">
+                            <p><strong>{{.titel}}</strong></p>
+                        </div>
+                        <div class="count">
+                            <p style="margin-top:0.5vh;color:white;">{{.count}}</p>
+                            <p style="margin-top:-2.25vh;color:white;font-size:1.25vh;">Karten</p>
+                        </div>
+                    </div>
+                    <div class="kar-des">
+                        <p style="margin-top:0px;">{{.beschreibung}}</p>
+                    </div>
+                </div>
+                {{end}}
+                {{else}}
+                <div class="kar-panel">
+                    <p class="kar-top" style="color:#2ECC71"> hallo</p>
+                    <div class="kar-heading">
+                        <div class="kar-title">
+                            <p><strong>Noch kein Kasten verfügbar</strong></p>
+                        </div>
+                        <div class="count">
+                            <p style="margin-top:0.5vh;color:white;">0</p>
+                            <p style="margin-top:-2.25vh;color:white;font-size:1.25vh;">Karten</p>
+                        </div>
+                    </div>
+                    <div class="kar-des">
+                        <p style="margin-top:0px;">Loggen Sie sich bitte ein oder registrieren Sie sich, damit
+                            Sie neue Kästen und Karten erstellen können.</p>
+                    </div>
+                </div>
+                {{end}}
+            </div>
+        </div>
+        <div style="margin-left: 5vh">
+                <h2>Sprache</h2>
+                <div class="kar-layout">
+                    {{if .Sprache}}
+                        {{range .Sprache}}        
+                    <div class="kar-panel">
+                        <p class="kar-top">{{.subkategorie}}</p>
+                        <div class="kar-heading">
+                            <div class="kar-title">
+                                <p><strong>{{.titel}}</strong></p>
+                            </div>
+                            <div class="count">
+                                <p style="margin-top:0.5vh;color:white;">{{.count}}</p>
+                                <p style="margin-top:-2.25vh;color:white;font-size:1.25vh;">Karten</p>
+                            </div>
+                        </div>
+                        <div class="kar-des">
+                            <p style="margin-top:0px;">{{.beschreibung}}</p>
+                        </div>
+                    </div>
+                    {{end}}
+                    {{else}}
+                    <div class="kar-panel">
+                        <p class="kar-top" style="color:#2ECC71"> hallo</p>
+                        <div class="kar-heading">
+                            <div class="kar-title">
+                                <p><strong>Noch kein Kasten verfügbar</strong></p>
+                            </div>
+                            <div class="count">
+                                <p style="margin-top:0.5vh;color:white;">0</p>
+                                <p style="margin-top:-2.25vh;color:white;font-size:1.25vh;">Karten</p>
+                            </div>
+                        </div>
+                        <div class="kar-des">
+                            <p style="margin-top:0px;">Loggen Sie sich bitte ein oder registrieren Sie sich, damit
+                                Sie neue Kästen und Karten erstellen können.</p>
+                        </div>
+                    </div>
+                    {{end}}
+                </div>
+            </div>
+            <div style="margin-left: 5vh">
+                    <h2>Gesellschaft</h2>
+                    <div class="kar-layout">
+                        {{if .Gesellschaft}}
+                            {{range .Gesellschaft}}        
+                        <div class="kar-panel">
+                            <p class="kar-top">{{.subkategorie}}</p>
+                            <div class="kar-heading">
+                                <div class="kar-title">
+                                    <p><strong>{{.titel}}</strong></p>
+                                </div>
+                                <div class="count">
+                                    <p style="margin-top:0.5vh;color:white;">{{.count}}</p>
+                                    <p style="margin-top:-2.25vh;color:white;font-size:1.25vh;">Karten</p>
+                                </div>
+                            </div>
+                            <div class="kar-des">
+                                <p style="margin-top:0px;">{{.beschreibung}}</p>
+                            </div>
+                        </div>
+                        {{end}}
+                        {{else}}
+                        <div class="kar-panel">
+                            <p class="kar-top" style="color:#2ECC71"> hallo</p>
+                            <div class="kar-heading">
+                                <div class="kar-title">
+                                    <p><strong>Noch kein Kasten verfügbar</strong></p>
+                                </div>
+                                <div class="count">
+                                    <p style="margin-top:0.5vh;color:white;">0</p>
+                                    <p style="margin-top:-2.25vh;color:white;font-size:1.25vh;">Karten</p>
+                                </div>
+                            </div>
+                            <div class="kar-des">
+                                <p style="margin-top:0px;">Loggen Sie sich bitte ein oder registrieren Sie sich, damit
+                                    Sie neue Kästen und Karten erstellen können.</p>
+                            </div>
+                        </div>
+                        {{end}}
+                    </div>
+                </div>
+                <div style="margin-left: 5vh">
+                        <h2>Wirtschaft</h2>
+                        <div class="kar-layout">
+                            {{if .Wirtschaft}}
+                                {{range .Wirtschaft}}        
+                            <div class="kar-panel">
+                                <p class="kar-top">{{.subkategorie}}</p>
+                                <div class="kar-heading">
+                                    <div class="kar-title">
+                                        <p><strong>{{.titel}}</strong></p>
+                                    </div>
+                                    <div class="count">
+                                        <p style="margin-top:0.5vh;color:white;">{{.count}}</p>
+                                        <p style="margin-top:-2.25vh;color:white;font-size:1.25vh;">Karten</p>
+                                    </div>
+                                </div>
+                                <div class="kar-des">
+                                    <p style="margin-top:0px;">{{.beschreibung}}</p>
+                                </div>
+                            </div>
+                            {{end}}
+                            {{else}}
+                            <div class="kar-panel">
+                                <p class="kar-top" style="color:#2ECC71"> hallo</p>
+                                <div class="kar-heading">
+                                    <div class="kar-title">
+                                        <p><strong>Noch kein Kasten verfügbar</strong></p>
+                                    </div>
+                                    <div class="count">
+                                        <p style="margin-top:0.5vh;color:white;">0</p>
+                                        <p style="margin-top:-2.25vh;color:white;font-size:1.25vh;">Karten</p>
+                                    </div>
+                                </div>
+                                <div class="kar-des">
+                                    <p style="margin-top:0px;">Loggen Sie sich bitte ein oder registrieren Sie sich, damit
+                                        Sie neue Kästen und Karten erstellen können.</p>
+                                </div>
+                            </div>
+                            {{end}}
+                        </div>
+                    </div>
+                    <div style="margin-left: 5vh">
+                            <h2>Geisteswissenschaften</h2>
+                            <div class="kar-layout">
+                                {{if .Geisteswissenschaften}}
+                                    {{range .Geisteswissenschaften}}        
+                                <div class="kar-panel">
+                                    <p class="kar-top">{{.subkategorie}}</p>
+                                    <div class="kar-heading">
+                                        <div class="kar-title">
+                                            <p><strong>{{.titel}}</strong></p>
+                                        </div>
+                                        <div class="count">
+                                            <p style="margin-top:0.5vh;color:white;">{{.count}}</p>
+                                            <p style="margin-top:-2.25vh;color:white;font-size:1.25vh;">Karten</p>
+                                        </div>
+                                    </div>
+                                    <div class="kar-des">
+                                        <p style="margin-top:0px;">{{.beschreibung}}</p>
+                                    </div>
+                                </div>
+                                {{end}}
+                                {{else}}
+                                <div class="kar-panel">
+                                    <p class="kar-top" style="color:#2ECC71"> hallo</p>
+                                    <div class="kar-heading">
+                                        <div class="kar-title">
+                                            <p><strong>Noch kein Kasten verfügbar</strong></p>
+                                        </div>
+                                        <div class="count">
+                                            <p style="margin-top:0.5vh;color:white;">0</p>
+                                            <p style="margin-top:-2.25vh;color:white;font-size:1.25vh;">Karten</p>
+                                        </div>
+                                    </div>
+                                    <div class="kar-des">
+                                        <p style="margin-top:0px;">Loggen Sie sich bitte ein oder registrieren Sie sich, damit
+                                            Sie neue Kästen und Karten erstellen können.</p>
+                                    </div>
+                                </div>
+                                {{end}}
+                            </div>
+                        </div>
+    </div>
+</div>
+{{end}}

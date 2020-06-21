@@ -1,0 +1,111 @@
+{{define "content"}}
+<div style="display: grid; grid-column-start: 2; grid-column-end: 6;">
+    <div>
+        <h1 style="margin-left: 5vh; margin-bottom:0.5vh;">Karteikästen</h1>
+        <div class="kar-sort">
+            <p style="margin-left: 5vh; margin-top:0vh;">Hier findest du deine Karteien wie öffentlichen
+                Karteien, die du angefangen hast zu lernen.</p>
+                <form action="/SortKasten" method="POST">
+                    <select name='sort' onchange='this.form.submit()'>
+                        <option disabled selected hidden>Sortieren nach...</option>
+                        <option >Naturwissenschafen</option>
+                        <option >Sprachen</option>
+                        <option >Gesellschaft</option>
+                        <option >Wirtschaft</option>
+                        <option >Geisteswissenschaften</option>
+                    </select>
+                    <noscript><input type="submit" value="Submit"></noscript>
+                    </form>
+        </div>
+        <div style="margin-left: 5vh">
+            <h2 style="margin-bottom:0px;">Selbst erstellte Karteikästen</h2>
+            <div class="kar-layout" style="width:100%;">
+                {{range .UserKasten}}
+                <div class="kar-panel" style="height:40vh;">
+                    <p class="kar-top">{{.kategorie}} ▶ {{.subkategorie}}</p>
+                    <div class="kar-heading">
+                        <div class="kar-title">
+                            <form action="/anschauen" method="POST">
+                                <input type="hidden" name="kastenid" value="{{._id}}">
+                                <button style="background:none; color:inherit;border:none; padding:0!important; font: inherit;cursor: pointer;" type="submit">{{.titel}}</button>
+                            </form>
+                        </div>
+                        <div class="count">
+                            <p style="margin-top:0.5vh;color:white;">{{.count}}</p>
+                            <p style="margin-top:-2.25vh;color:white;font-size:1.25vh;">Karten</p>
+                        </div>
+                    </div>
+                    <div class="kar-des" style="height:30%">
+                        <p style="margin-top:0px;">{{.beschreibung}}</p>
+                    </div>
+                    <div class="kar-fort">
+                        <p>Sichtbarkeit: <Strong>{{if .sichtbarkeit}}Öffentlich {{else}}Privat{{end}}</Strong></p>
+                        <p>Fortschritt: <strong> {{if .fortschritt}}{{.fortschritt}}{{else}}0%{{end}}</strong></p>
+                    </div>
+                    <div class="kar-but" style="text-align: center">
+                        <form action="/lernen" method="POST">
+                            <input type="hidden" name="kastenid"value="{{._id}}">
+                            <button class="login" type="submit" style="width:95%;border:0px;">Lernen</button>
+                        </form>
+                        <form action="/anschauen" method="POST">
+                            <input type="hidden" name="kastenid"value="{{._id}}">
+                            <input type="hidden" name="bearbeiten"value="Wat">
+                            <button class="login" type="submit" style="width:95%;border:0px;background-color:#2ECC71">Bearbeiten</button>
+                        </form>
+                        <form action="/deletekasten" method="POST">
+                            <input type="hidden" name="kastenid"value="{{._id}}">
+                            <button class="login" type="submit" style="width:70%;border:0px;background-color:#E74C3C;"><img style="height:2vh;"
+                                src="/favicon/Delete.svg" alt=""></button>
+                        </form>
+                    </div>
+                </div>
+                {{end}}
+            </div>
+        </div>
+        {{if .LernKasten}}
+        <div style="margin-left: 5vh">
+            <h2 style="margin-bottom:0px;">Gelernte Karteikästen anderer Nutzer</h2>
+            <div class="kar-layout" style="width:100%;">
+                {{range .LernKasten}}
+                <div class="kar-panel" style="height:40vh;">
+                    <p class="kar-top">{{.kategorie}} ▶ {{.subkategorie}}</p>
+                    <div class="kar-heading">
+                        <div class="kar-title">
+                           <a href="/anschauen" style="text-decoration:none; color:black;"> <p><strong>{{.titel}}</strong></p> </a>
+                        </div>
+                        <div class="count">
+                            <p style="margin-top:0.5vh;color:white;">{{.count}}</p>
+                            <p style="margin-top:-2.25vh;color:white;font-size:1.25vh;">Karten</p>
+                        </div>
+                    </div>
+                    <div class="kar-des" style="height:30%">
+                        <p style="margin-top:0px;">{{.beschreibung}}</p>
+                    </div>
+                    <div class="kar-fort">
+                        <p>Sichtbarkeit: <Strong>{{if .sichtbarkeit}}Öffentlich {{else}}Privat{{end}}</Strong></p>
+                        <p>Fortschritt: <strong> {{if .fortschritt}}{{.fortschritt}}{{else}}0%{{end}}</strong></p>
+                    </div>
+                    <div class="kar-but" style="text-align: center">
+                        <form action="/lernen" method="POST">
+                            <input type="hidden" name="kastenid"value="{{._id}}">
+                            <button class="login" type="submit" style="width:95%;border:0px;">Lernen</button>
+                        </form>
+                        <form action="/anschauen" method="POST">
+                            <input type="hidden" name="kastenid"value="{{._id}}">
+                            <input type="hidden" name="bearbeiten"value="Wat">
+                            <button class="login" type="submit" style="width:95%;border:0px;background-color:#2ECC71">Bearbeiten</button>
+                        </form>
+                        <form action="/deletekasten" method="POST">
+                            <input type="hidden" name="kastenid"value="{{._id}}">
+                            <button class="login" type="submit" style="width:70%;border:0px;background-color:#E74C3C;"><img style="height:2vh;"
+                                src="/favicon/Delete.svg" alt=""></button>
+                        </form>
+                    </div>
+                </div>
+                {{end}}
+                {{end}}
+            </div>
+        </div>
+    </div>
+</div>
+{{end}}

@@ -1,0 +1,72 @@
+{{define "content"}}
+<div style="display: grid; grid-column-start: 2; grid-column-end: 6;">
+    <div>
+        <h1 style="margin-left: 5vh; margin-bottom:0.5vh;">Karteikästen</h1>
+        <div class="kar-sort">
+            <p style="margin-left: 5vh; margin-top:0vh;padding-right:20vw;">Im Karteikasten findest du alle
+                öffentlichen Karteien.</p>
+                <form action="/SortKasten" method="POST">
+                    <select name='sort' onchange='this.form.submit()'>
+                        <option disabled selected hidden>Sortieren nach...</option>
+                        <option >Naturwissenschaft</option>
+                        <option >Sprachen</option>
+                        <option >Gesellschaft</option>
+                        <option >Wirtschaft</option>
+                        <option >Geisteswissenschaften</option>
+                    </select>
+                    <noscript><input type="submit" value="Submit"></noscript>
+                    </form>
+        </div>
+        <div style="margin-left: 5vh">
+            <h2 style="margin-bottom:0px;">{{.Kategorie}}</h2>
+            <div class="kar-layout">
+                {{if .Kasten}}
+                    {{range .Kasten}}
+                <div class="kar-panel">
+                    <p class="kar-top">{{.subkategorie}}</p>
+                    <div class="kar-heading">
+                        <div class="kar-title">
+                            <form action="/anschauen" method="POST">
+                                <input type="hidden" name="kastenid" value="{{._id}}">
+                                <button style="background:none; color:inherit;border:none; padding:0!important; font: inherit;cursor: pointer;" type="submit">{{.titel}}</button>
+                            </form>
+                        </div>
+                        <div class="count">
+                            <p style="margin-top:0.5vh;color:white;">{{.count}}</p>
+                            <p style="margin-top:-2.25vh;color:white;font-size:1.25vh;">Karten</p>
+                        </div>
+                    </div>
+                    <div class="kar-des">
+                        <p >{{.beschreibung}}</p>
+                    </div>
+                    <div style="text-align: center">
+                        <a class="login" href="/lernen" style="border:0px;">Lernen</a>
+                    </div>
+                </div>
+                {{end}}
+                {{else}}
+                <div class="kar-panel">
+                    <p class="kar-top" style="color:#2ECC71"> hallo</p>
+                    <div class="kar-heading">
+                        <div class="kar-title">
+                            <p><strong>Keine Kasten verfügbar</strong></p>
+                        </div>
+                        <div class="count">
+                            <p style="margin-top:0.5vh;color:white;">0</p>
+                            <p style="margin-top:-2.25vh;color:white;font-size:1.25vh;">Karten</p>
+                        </div>
+                    </div>
+                    <div class="kar-des">
+                        <p>Für diese Kategorie sind noch keine Kästen verfügbar, erstellen
+                                Sie doch einen</p>
+                    </div>
+                    <div style="text-align: center">
+                        <a class="login" href="/erstellen" style="border:0px;">Neue Karte</a>
+                    </div>
+                </div>
+                {{end}}
+            </div>
+        </div>
+    </div>
+</div>
+{{end}}

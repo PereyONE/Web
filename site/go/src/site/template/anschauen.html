@@ -1,0 +1,76 @@
+{{define "content"}}
+{{if .Error}}
+<p>{{.Error}}</p>
+{{else}}
+<div style="display: grid; grid-column-start: 2; grid-column-end: 6;">
+    <div>
+        <h1 style="margin-left: 5vh; margin-bottom:0.5vh;">Karteikasten anschauen</h1>
+        <div class="kar-sort">
+            <p style="margin-left: 5vh; margin-top:0vh;">Hier kannst du öffentliche Kästen anschauen.</p>
+        </div>
+        <div class="er2-all">
+            <div class="er2-topbar" style="grid-template-columns: 1fr 2fr 1fr 1fr 1fr;">
+                <div>
+                    <p>Name</p>
+                    <p><strong>{{.Kasten.Titel}}</strong></p>
+                </div>
+                <div>
+                    <p>Kategorie</p>
+                    <p><strong>{{.Kasten.Kategorie}} ▶ {{.Kasten.Subkategorie}}</strong></p>
+                </div>
+                <div>
+                    <p>Erstellt von</p>
+                    <p><strong>{{.Kasten.Ersteller}}</strong></p>
+                </div>
+                <div>
+                    <p>Fortschritt</p>
+                    <p><strong>0%</strong></p>
+                </div>
+
+                <div class="count">
+                    <p style="margin-top:0.5vh;color:white;">{{.Kasten.Count}}</p>
+                    <p style="margin-top:-2.25vh;color:white;font-size:1.25vh;">Karten</p>
+                </div>
+            </div>
+            <form action="/anschauen" method="POST">
+            <div class="er2-karte" id="{{.Erste.ID}}">
+                <input type="hidden" name="kastenid" value="{{.Kasten.ID}}">
+                <button type="submit" style="height:100%; width:100%;background:none; color:inherit;border:none; padding:0!important; font: inherit;cursor: pointer;">
+                    <p style="margin:0.5vh 0 0 1vh;">#1</p>
+                    <p style="margin:0 0 0 1vh;font-size: 2.5vh;"><strong>{{.Erste.Titel}}</strong></p>
+                </button>
+            </div>
+            </form>
+            <div class="er2-edit">
+                <p class="edit-p">Titel</p>
+                <div>
+                    <p class="edit-p" style="text-align:start;display:inline-block;"><strong>{{.Aktiv.Titel}}</strong></p>
+                    
+                </div>
+                <p class="edit-p">Frage</p>
+                <p class="edit-p" style="text-align:start;">{{.Aktiv.Frage}}</p>
+                <p class="edit-p">Antwort</p>
+                <p class="edit-p" style="text-align:start;">{{.Aktiv.Antwort}}</p>
+            </div>
+            {{range .Karten}}
+            <form action="/anschauen" method="POST">
+            <div class="er2-karte" id="{{._id}}">
+                <input type="hidden" name="kastenid" value="{{.kastenid}}">
+                <input type="hidden" name="kartenid" value="{{._id}}">
+                <button type="submit" style="height:100%; width:100%;background:none; color:inherit;border:none; padding:0!important; font: inherit;cursor: pointer;">
+                <p style="margin:0.5vh 0 0 1vh;">#{{.kartennummer}}</p>
+                <p style="margin:0 0 0 1vh;font-size: 2.5vh;"><strong>{{.titel}}</strong></p>
+                </button>
+            </div>
+            </form>
+            {{end}}
+        </div>
+    </div>
+</div>
+<script>
+var y = document.getElementById('{{.Aktiv.ID}}') ;
+y.style.backgroundColor = "#27AE60";
+</script>
+{{end}}
+{{end}}
+

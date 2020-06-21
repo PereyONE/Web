@@ -1,0 +1,106 @@
+{{define "content"}}
+<div style="display: grid; grid-column-start: 2; grid-column-end: 6;">
+    <div>
+        <h1 style="margin-left: 5vh; margin-bottom:0.5vh;">Karteikasten erstellen / bearbeiten</h1>
+        <div class="kar-sort">
+            <p style="margin-left: 5vh; margin-top:0vh;">Hier kannst du eine neue Kartei erstellen oder eine
+                vorhandene bei Bedarf bearbeiten.</p>
+        </div>
+        <form {{if .Updaten}} action="/updatekasten" {{else}} action="/kastenerstellen" {{end}}method="POST">
+            <input type="hidden" name="kastenid" value="{{.Kasten.ID}}">
+            <div class="er">
+                <p style="font-size:3vh; margin:0px;"><strong>Allgemeine Daten</strong></p>
+                <div class="er-in">
+                    <div style="align-self:center;">
+                        <p class="reg-txt">Titel</p>
+                    </div>
+                    <div style="align-self:center; text-align:start;">
+                        <input class="reg-element" type="text" name="titel" required {{if .Kasten}}
+                            value="{{.Kasten.Titel}}" {{else}} value="" {{end}}>
+                    </div>
+                    <div style="align-self:center;">
+                        <p class="reg-txt">Kategorie</p>
+                    </div>
+                    <div style="align-self:center; text-align:start;">
+                        <select name="subkategorie" required {{if .Kasten}} value="{{.Kasten.Titel}}" {{else}} value=""
+                            {{end}}>
+
+                            <optgroup label="Naturwissenschaften" name="Naturwissenschaften">
+                                <option>Biologie</option>
+                                <option>Chemie</option>
+                                <option>Elektrotechnik</option>
+                                <option>Informatik</option>
+                                <option>Mathematik1</option>
+                                <option>Medizin</option>
+                                <option>Naturkunde</option>
+                                <option>Physik</option>
+                                <option>Sonstiges</option>
+                            </optgroup>
+                            <optgroup label="Sprachen">
+                                <option>Chinesisch</option>
+                                <option>Deutsch</option>
+                                <option>Englisch</option>
+                                <option>Französisch</option>
+                                <option>Griechisch</option>
+                                <option>Italienisch</option>
+                                <option>Latein</option>
+                                <option>Russisch</option>
+                                <option>Sonstiges</option>
+                            </optgroup>
+                            <optgroup label="Gesellschaft">
+                                <option>Ethik</option>
+                                <option>Geschichte</option>
+                                <option>Literatur</option>
+                                <option>Musik</option>
+                                <option>Politik</option>
+                                <option>Recht</option>
+                                <option>Soziales</option>
+                                <option>Sport</option>
+                                <option>Verkehrskunde</option>
+                                <option>Sonstiges</option>
+                            </optgroup>
+                            <optgroup label="Wirtschaft">
+                                <option>BWL</option>
+                                <option>Finanzen</option>
+                                <option>Landwirtschaft</option>
+                                <option>Marketing</option>
+                                <option>VWL</option>
+                                <option>Sonstiges</option>
+                            </optgroup>
+                            <optgroup label="Geisteswissenschaft">
+                                <option>Kirminologie</option>
+                                <option>Philosophie</option>
+                                <option>Psychologie</option>
+                                <option>Pädagogik</option>
+                                <option>Theologie</option>
+                                <option>Sonstiges</option>
+                            </optgroup>
+                        </select>
+
+                        </span>
+                        <div style="display:none;color:red;"> Pflichtfeld</div>
+                    </div>
+                    <div>
+                        <p class="reg-txt">Beschreibung</p>
+                    </div>
+                    <div style="align-self:center; text-align:start;">
+                        <textarea name="beschreibung" id="" cols="30" rows="10" required>{{.Kasten.Beschreibung}}</textarea>
+                    </div>
+                    <div style="align-self:center;">
+                        <p class="reg-txt">Sichtbarkeit</p>
+                    </div>
+                    <div style="align-self:center; text-align:start;">
+                        <input type="radio" name="sichtbarkeit" value="true"> Öffentlich
+                        <input type="radio" name="sichtbarkeit"> Privat
+                    </div>
+                    <div></div>
+                    <div style="line-height:5vh; text-align: start;">
+                        <button style="width:14vw;line-height:5vh;" type="submit" class="login">Speichern und weiter
+                        </button>
+                    </div>
+        </form>
+    </div>
+</div>
+</div>
+</div>
+{{end}}

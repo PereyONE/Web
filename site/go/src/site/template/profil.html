@@ -1,0 +1,135 @@
+{{define "content"}}
+<div>
+    <h1 style="margin-left: 5vh; margin-bottom:0.5vh;">Mein Profil</h1>
+    <p style="margin-left: 5vh; margin-top:0vh;">Hier kannst du deine Profildaten aktualiesieren oder ändern.
+    </p>
+    <div class="pro-all">
+        <div class="pro-pic">
+            <img style="display:block;margin:auto; border-radius:50%; height:55%; text-align:center;"
+                src="{{.User.Bild}}">
+                <form action="/upload" enctype="multipart/form-data" method="POST">
+                    <input type="file" name="foto">
+                    <input type="submit">
+                </form>
+            <a href="" class="login" style="display:inline-block; text-align:center; margin-top:1vh;">Edit</a>
+            <p style="text-align: center; font-size: 3vh; margin:0px;margin-top:1.5vh;">{{.User.Username}}</p>
+            <p style="margin-top:0.5vh; ">{{.User.Email}}</p>
+        </div>
+        <div class="pro-up">
+            <p style="font-size: 3vh;margin-top:0px;"><strong>Update der Profildaten: </strong></p>
+
+            <div class="reg-input" style="font-size: 2.5vh;">
+                <div>
+                    <form action="/updateprofile" method="POST">
+                        <div style="align-self:center;">
+                            <p class="reg-txt">Altes Passwort:</p>
+                        </div>
+                        <div style="align-self:center;text-align:start;">
+                            <input class="reg-element" type="password" name="oldpassword" required>
+                        </div>
+                        <div></div>
+                        <div style="text-align: start">
+                            <div style="display:none;color:red;text-align: start;" id="pwcheckeins"> Altes Passwort ist
+                                falsch
+                            </div>
+                        </div>
+                        <div style="align-self:center;">
+                            <p class="reg-txt">Neues Passwort:</p>
+                        </div>
+                        <div style="align-self:center;text-align:start;">
+                            <input class="reg-element" type="password" name="newpassword" id="password" required>
+                        </div>
+                        <div></div>
+                        <div style="text-align: start">
+                            <div style="display:none;color:red;text-align: start;" id="pwcheckzwei"> Altes Passwort darf
+                                nicht
+                                mit neuem
+                                übereinstimmen.</div>
+                        </div>
+                        <div style="align-self:center;">
+                            <p class="reg-txt">Passwort wiederholen:</p>
+                        </div>
+                        <div style="align-self:center;text-align:start;">
+                            <input class="reg-element" type="password" required id="confirm_password">
+                        </div>
+                        <div></div>
+                        <div style="text-align: start">
+                            <div style="display:none;color:red;text-align: start;" id="pwcheck"> Passwort falsch
+                                wiederholt!
+                            </div>
+
+                            <div>
+                                <button type="submit" class="login"
+                                    style="height:5vh;font-size: 3vh; border-bottom-color:#F7B731;border-bottom:1vh;">Update</button>
+                            </div>
+                        </div>
+                    </form>
+                    <div style=" text-align: start; margin-left:3vh;">
+                        <button id="myBtn"><img src="/favicon/Delete.svg"
+                                style="height:3.5vh; background-color:#E74C3C;" alt=""></button>
+                    </div>
+
+                    <div id="myModal" class="modal">
+                        <div class="modal-content">
+                            <span class="close">&times;</span>
+                            <p style="margin:0;text-align: start;"><Strong>Löschen</Strong></p>
+                            <p style="margin:0;text-align: start;">Sind Sie sicher, dass sie ihr Konto Löschen
+                                Wollen?
+                            </p>
+                            <form action="/profil">
+                            <button style="color:#ffffffff; background-color: #2ECC71; text-decoration: none;">Behalten</button>
+                            </form>
+                           <form action="/deleteuser" method="POST">
+                                <button 
+                                style="color:#ffffffff; background-color: #E74C3C; text-decoration: none;">Löschen</button>
+                        </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="pro-sta">
+            <p style="font-size: 3vh;margin:0vh 0vh 0vh 0vh;padding:2vh 0vh 0vh 3vh;">Statistik:</p>
+            <div
+                style="display:grid; grid-template-rows:1fr 1fr 1fr;grid-template-columns:1fr 1fr;padding:2vh 0vh 0vh 1vh;font-size: 2.25vh;">
+                <p>Erstellte Karten:</p>
+                <p>{{.KartenCount}}</p>
+                <p>Erstellte Karteien:</p>
+                <p>{{.PrivateCount}}</p>
+                <p>Mitglied seit:</p>
+                <p>{{.User.ErstelltAm}}</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    //confirm password
+    var password = document.getElementById("password");
+    var confirm_password = document.getElementById("confirm_password");
+    var pwcheck = document.getElementById("pwcheck")
+
+    function validatePassword() {
+        if (password.value != confirm_password.value) {
+            confirm_password.setCustomValidity("Passwords Don't Match");
+            pwcheck.style.display = "block";
+        } else {
+            confirm_password.setCustomValidity('');
+            pwcheck.style.display = "none";
+        }
+    }
+
+    password.onchange = validatePassword;
+    confirm_password.onkeyup = validatePassword;
+
+    var fail = '{{.Fail}}';
+    var check1 = document.getElementById("pwcheckeins");
+    var check2 = document.getElementById("pwcheckzwei");
+    if (fail == 1) {
+        check1.style.display = "block"
+    } else if (fail == 2) {
+        check2.style.display = "block"
+    }
+
+</script>
+{{end}}

@@ -1,0 +1,53 @@
+{{define "content"}}
+<div style="display: grid; grid-column-start: 2; grid-column-end: 6;">
+    <div>
+        <h1 style="margin-left: 5vh">Registrieren</h1>
+        <div class="reg-panel">
+            <p style="padding: 0vh 23vh 1vh 1vh;">Wir freuen uns, dass du dich auf BrainTrain anmelden möchtest. Bitte
+                beachte, dass <strong>pro Emailadresse nur ein Nutzer</strong> erstellt werden kann und jeder
+                <strong>Nutzername nur einmal vergeben wird</strong>.</p>
+            <form action="/registerIn" method="POST">
+            <div class="reg-input">
+                <div style="align-self:center;">
+                    <p class="reg-txt">Nutzername:</p>
+                </div>
+                <div style="align-self:center; text-align:start;">
+                    <input class="reg-element" type="text" name="username">
+                </div>
+                <div style="align-self:center;">
+                    <p class="reg-txt">Email:</p>
+                </div>
+                <div style="align-self:center;text-align:start;">
+                    <input class="reg-element" type="text" name="mail">
+                </div>
+                <div style="align-self:center;">
+                    <p class="reg-txt">Passwort:</p>
+                </div>
+                <div style="align-self:center;text-align:start;">
+                    <input class="reg-element" type="password" name="password">
+                </div>
+                <div style="align-self:center;">
+                    <p class="reg-txt">Passwort wiederholen:</p>
+                </div>
+                <div style="align-self:center;text-align:start;">
+                    <input class="reg-element" type="password" >
+                </div>
+                <div style=" align-self: center; padding-right:2vw;">
+                    <input type="checkbox">
+                </div>
+                <div style="text-align:start;font-size: 1.5vh; padding-right:25vw;">
+                    <p>Ich habe die nicht-vorhandenen Datenschutz- erklärungen zur Kenntnis genommen</p>
+                </div>
+                <div>
+
+                </div>
+                <div style="text-align: start;">
+                        <button type="submit" class="login" style="height:5vh;font-size: 3vh; border-bottom-color:#F7B731;border-bottom:1vh;">Login</button>
+                        
+                </div>
+            </div>
+            </form>
+        </div>
+    </div>
+</div>
+{{end}}

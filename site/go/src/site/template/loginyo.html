@@ -1,0 +1,67 @@
+{{define "layout"}}
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Hier der Test dann</title>
+    <link rel="stylesheet" href="/css/indexlog.css">
+    <link rel="stylesheet" href="/css/modal.css">
+    <link rel="stylesheet" href="/css/font.css">
+    <link rel="stylesheet" href="/css/simplemde-fork-fa5.min.css">
+    <link rel="stylesheet" href="C:\Users\Platzhalter\node_modules\bulma\css\bulma.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.css">
+
+    <script src="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.js"></script>
+    <script src="/js/jquery.js"></script>
+    
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+
+<body>
+    <div class=topnav>
+        <a class="yo" href="/LogIn"><img class="logo" src="/favicon/Logo.svg"> BrainTrain</a>
+        <input type="button" id="sidetog" class="sidetoggle">
+        <div></div>
+        <a class="login" href="/erstellen">Neue Karte</a>
+        <div style="text-align:end; padding-right: 1vw;">
+            <p style="margin:0px;color:white; font-size: 1.9vh;">{{.User.Username}}</p>
+            <a style="text-decoration:none;margin:0px;color:white;" href="/">Logout</a>
+        </div>
+        <div><a class="fresse" href="/profil"><img
+                    style="max-height:100%; border-radius: 50%; border-color: #2ECC71" src="/favicon/fresse.png"></a>
+        </div>
+        <div class="sidenav">
+            <div class="side-elem">
+                <a class="side-txt" href="/LogIn"><img class="side-img"
+                        src="/favicon/Home.svg">Home</a>
+            </div>
+            <div class="side-elem">
+                <a class="side-txt" href="/LogIn/kasten"><img class="side-img"
+                        src="/favicon/Karteikasten.svg">Karteikästen <div style="text-align:center;border-radius: 15%;line-height:3vh;width:3.5vh; ;display: inline-block;background-color:#2ECC71;color:#ffffffff">
+                            22
+                        </div></a>
+            </div>
+            <div class="side-elem">
+                <a class="side-txt" href="/meinekasten"><img class="side-img"
+                        src="/favicon/Meine-Karteien.svg">Meine Karteikästen <div style="text-align:center;border-radius: 15%;line-height:3vh;width:3.5vh; display: inline-block;background-color:#2ECC71;color:#ffffffff">
+                            {{User.ErstellteKasten}}
+                        </div></a>
+            </div>
+            <div class="side-elem">
+                <a class="side-txt" href="/profil"><img class="side-img"
+                        src="/favicon/Mein-Profil.svg">Profil</a>
+            </div>
+        </div>
+        {{template "content" .}}
+    
+    </div>
+    <script src="/js/modal.js"></script>
+    <script src="/js/simplemde-fork-fa5.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.js"> </script>
+    <script>
+    var simplemde = new SimpleMDE({ element: document.getElementById("Yoo") });
+    var simplemde = new SimpleMDE({ element: document.getElementById("MyID") });
+    </script>
+</body>
+{{end}}

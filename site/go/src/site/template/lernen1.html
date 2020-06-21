@@ -1,0 +1,87 @@
+{{define "content"}}
+{{if .Error}}
+<p>{{.Error}}</p>
+{{else}}
+<div style="display: grid; grid-column-start: 2; grid-column-end: 6;">
+    <div>
+        <h1 style="margin-left: 5vh; margin-bottom:0.5vh;"></h1>
+        <div class="kar-sort">
+            <p style="margin-left: 5vh; margin-top:0vh;">Hier wird dir zufällig aus der gewählten Kartei
+                angeziegt.</p>
+        </div>
+        <div class="er2-topbar">
+            <div>
+                <p>Name</p>
+                <p><strong>{{ .Kasten.Titel}}</strong></p>
+            </div>
+            <div>
+                <p>Kategorie</p>
+                <p><strong>{{ .Kasten.Kategorie}} ▶ {{.Kasten.Subkategorie}}</strong></p>
+            </div>
+            <div>
+                <p>Fortschritt</p>
+                <p><strong>0%</strong></p>
+            </div>
+            <div style="display: grid; grid-template-columns:8.5vw 3vw 3vw 3vw 3vw 3vw;">
+                <p>Wiederholung</p>
+                <p>0</p>
+                <p>1</p>
+                <p>2</p>
+                <p>3</p>
+                <p>4</p>
+                <p>Karten</p>
+                <p><strong>0</strong></p>
+                <p><strong>1</strong></p>
+                <p><strong>2</strong></p>
+                <p><strong>3</strong></p>
+                <p><strong>4</strong></p>
+            </div>
+            <div class="count">
+                <p style="margin-top:0.5vh;color:white;">{{.Kasten.Count}}</p>
+                <p style="margin-top:-2.25vh;color:white;font-size:1.25vh;">Karten</p>
+            </div>
+        </div>
+        <div class="er2-edit" style="margin:0 20vh 0 20vh;height:40vh;">
+            <p class="edit-p" style="align-self:center;">Titel</p>
+            <div style=" line-height: 0.8;">
+                <p class="edit-p" style="text-align:start;display:inline-block;"><strong>{{ .Karte.Titel}}</strong></p>
+                <div class="count"
+                    style="display:inline-block;background-image:url(/favicon/hexagon-grau.png); margin-left: 15vw;"
+                    ;>
+                    <p style="color:white;">1</p>
+                </div>
+                <div class="count" style="display:inline-block;">
+                    <p style="color:white;">2</p>
+                </div>
+                <div class="count" style="display:inline-block;background-image:url(/favicon/hexagon-grau.png)"
+                    ;>
+                    <p style="color:white;">3</p>
+                </div>
+                <div class="count" style="display:inline-block;background-image:url(/favicon/hexagon-grau.png)"
+                    ;>
+                    <p style="color:white;">4</p>
+                </div>
+                <div class="count" style="display:inline-block;background-image:url(/favicon/hexagon-grau.png)"
+                    ;>
+                    <p style="color:white;">5</p>
+                </div>
+            </div>
+            <p class="edit-p">Frage</p>
+            <p class="edit-p" style="text-align:start;"> {{ .Karte.Frage}}</p>
+            <p class="edit-p">Antwort</p>
+            <form action="/lernen" method="POST">
+                <input type="hidden" name="kastenid" value="{{.Kasten.ID}}">
+                <input type="hidden" name="kartenid" value="{{.Karte.ID}}">
+            <button type="submit"  class="login" >Aufdecken</button>
+            </form>
+            <div></div>
+            <div></div>
+            <form action="/lernen" method="POST">
+                <input type="hidden" name="kastenid" value="{{.Kasten.ID}}">
+            <button type="submit"  class="login" style="justify-self:end;">Überspringen</button>
+            </form>
+        </div>
+    </div>
+</div>
+{{end}}
+{{end}}

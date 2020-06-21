@@ -1,0 +1,108 @@
+{{define "content"}}
+<div style="display: grid; grid-column-start: 2; grid-column-end: 6;">
+    <div>
+        <h1 style="margin-left: 5vh">Registrieren</h1>
+        <div class="reg-panel">
+            <p style="padding: 0vh 23vh 1vh 1vh;">Wir freuen uns, dass du dich auf BrainTrain anmelden möchtest. Bitte
+                beachte, dass <strong>pro Emailadresse nur ein Nutzer</strong> erstellt werden kann und jeder
+                <strong>Nutzername nur einmal vergeben wird</strong>.</p>
+            <form action="/registerIn" method="POST">    
+            <div class="reg-input-fail">
+                <div style="align-self:center;">
+                    <p class="reg-txt">Nutzername:</p>
+                </div>
+                <div style="align-self:center; text-align:start;">
+                    <input class="reg-element" type="text" name="username" required style="width:85%;">
+                </div>
+                <div>
+                    <div style="text-align: start;line-height: 4vh;background: #E74C3C;width: 70%;">
+                        <p style="color:#ffffff; text-align: center;display:none;"  id="nameerror">Dieser Benutzername ist bereits vergeben!</p>
+                    </div>
+                </div>
+                <div style="align-self:center;">
+                    <p class="reg-txt">Email:</p>
+                </div>
+                <div style="align-self:center;text-align:start;">
+                    <input class="reg-element" type="email" name="mail" required style="width:85%;">
+                </div>
+                <div>
+                    <div
+                        style="text-align: start;align-self: center;justify-self: center;line-height: 4vh;background: #E74C3C;width: 70%;">
+                        <p style="color:#ffffff; text-align: center;display:none;" id="mail">Diese Emailadresse wird bereits verwendet!</p>
+                    </div>
+                </div>
+                <div style="align-self:center;">
+                    <p class="reg-txt">Passwort:</p>
+                </div>
+                <div style="align-self:center;text-align:start;">
+                    <input class="reg-element" type="password" name="password" required  id="password" style="width:85%;">
+                </div>
+                <div>
+                </div>
+                <div style="align-self:center;">
+                    <p class="reg-txt">Passwort wiederholen:</p>
+                </div>
+                <div style="align-self:center;text-align:start;">
+                    <input class="reg-element" type="password" id="confirm_password" required style="width:85%;">
+                </div>
+                <div>
+                    <div
+                        style="text-align: start;align-self: center;justify-self: center;line-height: 4vh;background: #E74C3C;width: 70%;">
+                        <p style="color:#ffffff; text-align: center;display:none;" id="pwcheck">Die Passwörter stimmen nicht überein!</p>
+                    </div>
+                </div>
+                <div style=" align-self: center; padding-right:2vw;">
+                    <input type="checkbox" required>
+                </div>
+                <div style="text-align:start;font-size: 1.5vh;">
+                    <p>Ich habe die nicht-vorhandenen Datenschutz- erklärungen zur Kenntnis genommen</p>
+                </div>
+                <div>
+                    <div
+                        style="text-align: start;align-self: center;justify-self: center;line-height: 4vh;background: #E74C3C;width: 70%;">
+                        <p style="color:#ffffff; text-align: center;display:none;" >Bitte setzen Sie hier einen Haken!</p>
+                    </div>
+                </div>
+                <div>
+                </div>
+                <div style="text-align: start;">
+                    <button type="submit" class="login" style="height:5vh;font-size: 3vh; border-bottom-color:#F7B731;border-bottom:1vh;">Login</button>
+                </div>
+            </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script>
+    //confirm password
+    var password = document.getElementById("password");
+    var confirm_password = document.getElementById("confirm_password");
+    var pwcheck = document.getElementById("pwcheck")
+
+    function validatePassword(){
+        if(password.value != confirm_password.value) {
+            confirm_password.setCustomValidity("Passwords Don't Match");
+            pwcheck.style.display = "block";
+        } else {
+            confirm_password.setCustomValidity('');
+            pwcheck.style.display = "none";
+        }
+    }
+
+password.onchange = validatePassword;
+confirm_password.onkeyup = validatePassword;
+
+    var error= document.getElementById('nameerror');
+    var mail= document.getElementById('mail');
+    var Data = '{{.}}';
+    if (Data == 1){
+        error.style.display = "block";
+        mail.style.display = "block";
+    } else if (Data == 2){
+        error.style.display = "block";
+    } else if (Data == 3){
+        mail.style.display = "block";
+    }
+</script>
+{{end}}
